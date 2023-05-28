@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .image-container {
+            position: fixed;
+            left: 30%;
+            transform: translate(-50%, -50%);
+        }
+
+        .image-container img {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 0.2s;
+        }.image-container img {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.2s;
+}
+        .hover-word{
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <p style="text-align: center;">
+        Hover over the word "<span class="hover-word">Student</span>" to see a random image.
+    </p>
+    <div class="image-container">
+        <img src="student/img_1.png" alt="Image 1">
+        <img src="student/img_2.png" alt="Image 2">
+        <img src="student/img_3.png" alt="Image 3">
+        <!-- Add more image tags as needed -->
+    </div>
+    
+    <script>
+        var hoverWord = document.querySelector('.hover-word');
+        var imageContainer = document.querySelector('.image-container');
+        var images = document.querySelectorAll('.image-container img');
+        var lastImageIndex = -1;
+
+        hoverWord.addEventListener('mouseover', function() {
+            var randomIndex = getRandomImageIndex();
+            images[randomIndex].style.display = 'inline-block';
+        });
+
+        hoverWord.addEventListener('mouseout', function() {
+            images.forEach(function(image) {
+                image.style.display = 'none';
+            });
+        });
+
+        function getRandomImageIndex() {
+            var randomIndex = Math.floor(Math.random() * images.length);
+            if (randomIndex === lastImageIndex) {
+                randomIndex = (randomIndex + 1) % images.length;
+            }
+            lastImageIndex = randomIndex;
+            return randomIndex;
+        }
+    </script>
+</body>
+</html>
